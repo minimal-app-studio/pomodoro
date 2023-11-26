@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import SettingsIcon from "./assets/icons/Settings";
+import ButtonTab from "./components/ButtonTab";
+import Timer from "./components/Timer";
+import SettingsModal from "./screens/SettingsModal";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
+  const [isModalOpen, setIsModalOpen] = useState(true);
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <div className="flex flex-col items-center justify-between h-screen p-8 bg-dark-blue-500 ">
+        <div className="flex flex-col items-center justify-between gap-8 ">
+          <p className="font-bold text-grey">Pomodoro</p>
+          <ButtonTab />
+        </div>
+        <Timer duration={94} />
+        <button>
+          <SettingsIcon />
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
 
-export default App
+      {isModalOpen && <SettingsModal onClose={() => setIsModalOpen(false)} />}
+    </>
+  );
+};
+
+export default App;
